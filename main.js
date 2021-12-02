@@ -18,27 +18,17 @@ camera.position.setZ(5);
 const controls = new OrbitControls(camera, renderer.domElement);
 
 
-function addStar() {
+function addStars(numberOfStars) {
   const geometry = new THREE.SphereGeometry(0.25);
   const material = new THREE.MeshStandardMaterial({ color: 0xffffff});
   
-  for(let i=0; i < 1000; i++) {
+  for(let i=0; i < numberOfStars; i++) {
     const star = new THREE.Mesh(geometry, material);
-    const randomX = addRandomNegative({number: Math.random() * 100, probability: 0.5});
-    const randomY = addRandomNegative({number: Math.random() * 100, probability: 0.5});
-    const randomZ = addRandomNegative({number: Math.random() * 100, probabilyt: 0.5});
+    const randomX = THREE.MathUtils.randFloatSpread( 100 );
+    const randomY = THREE.MathUtils.randFloatSpread( 100 );
+    const randomZ = THREE.MathUtils.randFloatSpread( 100 ); 
     star.position.set(randomX, randomY, randomZ);
     scene.add(star);
-  }
-
-  //helper function
-  function addRandomNegative({number, probability = 0.5}) {
-    const randomNum = Math.random();
-    if(randomNum > probability) {
-      return -number;
-    } else {
-      return number;
-    } 
   }
 }
 
@@ -50,27 +40,18 @@ const diamond = new THREE.Mesh( geometry, material);
 
 
 //define lights
-const ambientLight = new THREE.AmbientLight( 0x404040);
-const pointLightBlue = new THREE.SpotLight( 0x0000ff, 1, 10 );
-const pointLightRed = new THREE.SpotLight( 0xff0000, 1, 10 );
-pointLightRed.position.set(2, 0, 0);
-pointLightBlue.position.set(-2, 0, 0);
+const ambientLight = new THREE.AmbientLight( 0xffffff);
 
 
 //define debug helpers
-const redLightHelper = new THREE.SpotLightHelper(pointLightRed);
-const blueLightHelper = new THREE.SpotLightHelper(pointLightBlue);
 const gridHelper = new THREE.GridHelper(100, 100);
 
 
 //add elements to scene
 scene.add( diamond );
 scene.add( ambientLight );
-scene.add( pointLightBlue );
-scene.add( pointLightRed );
-scene.add( redLightHelper, blueLightHelper );
 scene.add( gridHelper );
-addStar();
+addStars(100);
 
 
 //animation loop
