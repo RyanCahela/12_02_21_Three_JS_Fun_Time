@@ -11,16 +11,27 @@ const renderer = new THREE.WebGLRenderer({
 })
 renderer.setPixelRatio( window.devicePixelRatio );
 renderer.setSize( window.innerWidth, window.innerHeight );
-camera.position.setZ(10);
+camera.position.setZ(5);
 
 
 //define elements
 const geometry = new THREE.OctahedronGeometry();
-const material = new THREE.MeshBasicMaterial( { color: 0xff00ff} );
+const material = new THREE.MeshStandardMaterial( { color: 0xff00ff } );
 const diamond = new THREE.Mesh( geometry, material);
+
+
+//define lights
+const ambientLight = new THREE.AmbientLight( 0x404040 );
+const pointLightBlue = new THREE.PointLight( 0x0000ff );
+const pointLightRed = new THREE.PointLight( 0xff0000 );
+pointLightRed.position.set(5, 5, 0);
+pointLightBlue.position.set(-5, -5, 0);
 
 //add elements to scene
 scene.add( diamond );
+scene.add( ambientLight );
+scene.add( pointLightBlue );
+scene.add( pointLightRed );
 
 
 //animation loop
