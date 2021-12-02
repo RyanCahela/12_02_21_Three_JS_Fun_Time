@@ -66,6 +66,9 @@ const moon = new THREE.Mesh(
   })
 );
 
+moon.rotation.z = 20;
+moon.position.set(10, 0, 100);
+
 //define lights
 const ambientLight = new THREE.AmbientLight(0xffffff);
 const pointLight = new THREE.PointLight(0xffffff);
@@ -80,7 +83,7 @@ scene.add(moon);
 scene.add(ryan);
 scene.add(ambientLight);
 scene.add(pointLight);
-scene.add(gridHelper);
+// scene.add(gridHelper);
 addStars(100);
 
 //animation loop
@@ -89,6 +92,8 @@ function animate() {
 
   torus.rotation.x += 0.001;
   torus.rotation.y += 0.001;
+
+  moon.rotation.y += 0.01;
 
   controls.update();
 
@@ -99,10 +104,6 @@ animate();
 
 function moveCamera() {
   const top = -Math.abs(document.body.getBoundingClientRect().top);
-
-  moon.rotation.x += 0.05;
-  moon.rotation.y += 0.075;
-  moon.rotation.z += 0.05;
 
   ryan.rotation.y += 0.01;
   ryan.rotation.z += 0.01;
