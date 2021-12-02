@@ -3,3 +3,16 @@ canvas {
   top: 0;
   left: 0;
 }
+
+main {
+  position: absolute;
+}
+
+section {
+  padding-top: 500px;
+}
+
+p {
+  background-color: whitesmoke;
+  color: #212121;
+}

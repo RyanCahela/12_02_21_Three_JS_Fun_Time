@@ -2,7 +2,6 @@ import "./style.css";
 
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-import { ACESFilmicToneMapping } from "three";
 
 //set up scene, camera, and renderer
 const scene = new THREE.Scene();
@@ -17,7 +16,6 @@ const renderer = new THREE.WebGLRenderer({
 });
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
-camera.position.setZ(5);
 
 //set up controls
 const controls = new OrbitControls(camera, renderer.domElement);
@@ -98,3 +96,22 @@ function animate() {
 }
 
 animate();
+
+function moveCamera() {
+  const top = -Math.abs(document.body.getBoundingClientRect().top);
+
+  moon.rotation.x += 0.05;
+  moon.rotation.y += 0.075;
+  moon.rotation.z += 0.05;
+
+  ryan.rotation.y += 0.01;
+  ryan.rotation.z += 0.01;
+
+  camera.position.z = -top * 0.1;
+  // camera.position.x = top * -0.0002;
+  // camera.position.y = top * -0.0002;
+  console.log(camera.position);
+  console.log("top", top);
+}
+
+document.body.onscroll = moveCamera;
